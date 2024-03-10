@@ -11,6 +11,14 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
+        ordering = ['-published_at']
 
     def __str__(self):
         return self.title
+class Scope(models.Model):
+    articles = models.ManyToManyField(Article, related_name='orders', through='ArticleScope')
+
+class ArticleScope(models.Model):
+    tag = models.CharField(max_length=256, verbose_name='Название')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='positions')
+    scopes = models.ForeignKey(Scope, on_delete=models.CASCADE, related_name='positions')
