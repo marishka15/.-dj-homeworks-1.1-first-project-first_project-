@@ -11,27 +11,20 @@ from .models import Sensor, Measurement
 from .serializers import MeasurementSerializer, SensorDetailSerializer, MeasurementsSerializer
 
 class CreateSensor(CreateAPIView):
-    def post(self, request):
-        return Response({
-            "name": "ESP32",
-            "description": "Датчик на кухне за холодильником"
-        })
+    queryset = Sensor.objects.all()
+    serializer_class = SensorDetailSerializer
+
 
 class RetrieveUpdateSensor(RetrieveUpdateAPIView):
-    def patch(self, request, *args, **kwargs):
-        return Response({"description": "Перенес датчик на балкон"})
-
     queryset = Sensor.objects.all()
-    serializer_class = SensorDetailSerializer(queryset)
-
+    serializer_class = SensorDetailSerializer()
+#
 class AddMeasurement(CreateAPIView):
-    def post(self, request):
-        return Response({"sensor": 1, "temperature": 22.3})
-
     queryset = Measurement.objects.all()
     serializer_class = MeasurementSerializer
 
-class MeasurementListCreate(ListCreateAPIView):
-    queryset = Measurement.objects.all()
-    serializer_class = MeasurementsSerializer
+# class SensorListCreate(ListCreateAPIView):
+#     queryset = Sensor.objects.all()
+#     serializer_class = SensorDetailSerializer(queryset)
+
 
