@@ -23,8 +23,8 @@ class AddMeasurement(CreateAPIView):
     queryset = Measurement.objects.all()
     serializer_class = MeasurementSerializer
 
-# class SensorListCreate(ListCreateAPIView):
-#     queryset = Sensor.objects.all()
-#     serializer_class = SensorDetailSerializer(queryset)
+class SensorListCreate(ListCreateAPIView):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorDetailSerializer
 
 

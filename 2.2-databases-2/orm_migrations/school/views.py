@@ -8,10 +8,9 @@ def students_list(request):
     template = 'school/students_list.html'
     # используйте этот параметр для упорядочивания результатов
     # https://docs.djangoproject.com/en/2.2/ref/models/querysets/#django.db.models.query.QuerySet.order_by
-    students = Student.objects.order_by('group')
-    # ordering = 'group'
-    # if ordering:
-    #     students = Student.objects.order_by([ordering])
+    ordering = 'group'
+    if ordering:
+        students = Student.objects.order_by('group')
 
     context = {'object_list': students}
     return render(request, template, context)
